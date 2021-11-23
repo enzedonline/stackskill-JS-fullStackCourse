@@ -22,18 +22,25 @@ class InputField extends Component {
                     id={this.props.name}
                     type={this.props.inputType}
                     placeholder={this.props.placeholder}
-                    data-sb-validations={Object.keys(this.props.validations).join()}
+                    // data-sb-validations={Object.keys(this.props.validations).join()}
+                    name={this.props.name}
                     value={this.props.value}
-                    onChange={(e) => this.props.onChange(e)}
+                    onChange={this.props.onChange}
+                    onBlur={this.props.onBlur}
                 />
-                {
+                <p className="help-block text-danger">
+                    {(this.props.touched && this.props.errors) &&
+                        <span>{`${this.props.errors}`}</span>
+                    }
+                </p>
+                {/* {
                     Object.entries(this.props.validations).map((item, index) => {
                         return(
                         <div className="invalid-feedback" key={index} data-sb-feedback={`${this.props.name}:${item[0]}`}>
                             {item[1]}
                         </div>
                     )})
-                }
+                } */}
             </div>
         );
     }
@@ -47,18 +54,25 @@ class TextAreaField extends Component {
                     className="form-control"
                     id={this.props.name}
                     placeholder={this.props.placeholder}
-                    data-sb-validations={Object.keys(this.props.validations).join()}
+                    // data-sb-validations={Object.keys(this.props.validations).join()}
+                    name={this.props.name}
                     value={this.props.value}
-                    onChange={(e) => this.props.onChange(e)}
+                    onChange={this.props.onChange}
+                    onBlur={this.props.onBlur}
                 />
-                {
+                <p className="help-block text-danger">
+                    {(this.props.touched && this.props.errors) &&
+                        <span>{`${this.props.errors}`}</span>
+                    }
+                </p>
+                {/* {
                     Object.entries(this.props.validations).map((item, index) => {
                         return(
                         <div className="invalid-feedback" key={index} data-sb-feedback={`${this.props.name}:${item[0]}`}>
                             {item[1]}
                         </div>
                     )})
-                }
+                } */}
             </div>
         );
     }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Field from "../blocks/Field";
+import { withFormik } from "formik";
 
 const fieldList = {
   columns: [
@@ -42,20 +43,20 @@ const fieldList = {
 };
 
 class Contact extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    };
-  }
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       name: "",
+//       email: "",
+//       phone: "",
+//       message: "",
+//     };
+//   }
 
-  submitHandler = (e) => {
-    e.preventDefault();
-    alert("Submitted\n" + Object.entries(this.state).join("\n"));
-  };
+//   submitHandler = (e) => {
+//     e.preventDefault();
+//     alert("Submitted\n" + Object.entries(this.state).join("\n"));
+//   };
 
   render() {
     return (
@@ -68,17 +69,8 @@ class Contact extends Component {
                 Lorem ipsum dolor sit amet consectetur.
               </h3>
             </div>
-            {/* <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!--> */}
             <form
-              onSubmit={(e) => {
-                this.submitHandler(e);
-              }}
+              onSubmit={this.props.handleSubmit}
               id="contactForm"
               data-sb-form-api-token="API_TOKEN"
             >
@@ -91,10 +83,11 @@ class Contact extends Component {
                           <Field
                             {...field}
                             key={i}
-                            value={this.state[field.name]}
-                            onChange={(e) =>
-                              this.setState({ [field.name]: e.target.value })
-                            }
+                            value={this.props.values[field.name]}
+                            onChange={this.props.handleChange}
+                            onBlur={this.props.handleBlur}
+                            touched={this.props.touched[field.name]}
+                            errors={this.props.errors[field.name]}
                           />
                         );
                       })}
@@ -129,12 +122,9 @@ class Contact extends Component {
               {/* <!-- Submit Button--> */}
               <div className="text-center">
                 <button
-                  className="btn btn-primary btn-xl text-uppercase disabled"
+                  className="btn btn-primary btn-xl text-uppercase "
                   id="submitButton"
                   type="submit"
-                  onClick={(e) => {
-                    this.submitHandler(e);
-                  }}
                 >
                   Send Message
                 </button>
@@ -147,4 +137,25 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+export default withFormik({
+    mapPropsToValues: () => ({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+    }),
+    validate: (values) => {
+        const errors = {};
+        console.log(`Validate: ${Object.entries(values)}`);
+        // eslint-disable-next-line array-callback-return
+        Object.keys(values).map((v) => {
+            if(!values[v]){
+                errors[v] = "Required";
+            }
+        })
+        return errors;
+    },
+    handleSubmit: (values, {setSubmitting}) => {
+        alert(JSON.stringify(values));
+    }
+})(Contact);
