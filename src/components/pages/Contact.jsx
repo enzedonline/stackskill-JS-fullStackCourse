@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Field from "../blocks/Field";
 import { withFormik } from "formik";
+import * as Yup from "yup";
 
 const fieldList = {
   columns: [
@@ -43,20 +44,20 @@ const fieldList = {
 };
 
 class Contact extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       name: "",
-//       email: "",
-//       phone: "",
-//       message: "",
-//     };
-//   }
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       name: "",
+  //       email: "",
+  //       phone: "",
+  //       message: "",
+  //     };
+  //   }
 
-//   submitHandler = (e) => {
-//     e.preventDefault();
-//     alert("Submitted\n" + Object.entries(this.state).join("\n"));
-//   };
+  //   submitHandler = (e) => {
+  //     e.preventDefault();
+  //     alert("Submitted\n" + Object.entries(this.state).join("\n"));
+  //   };
 
   render() {
     return (
@@ -122,7 +123,11 @@ class Contact extends Component {
               {/* <!-- Submit Button--> */}
               <div className="text-center">
                 <button
-                  className="btn btn-primary btn-xl text-uppercase "
+                  className={`btn btn-primary btn-xl text-uppercase${
+                    ((Object.keys(this.props.errors).length > 0) || (!this.props.dirty))?
+                    " disabled"
+                    : ''
+                    }` }
                   id="submitButton"
                   type="submit"
                 >
@@ -138,24 +143,28 @@ class Contact extends Component {
 }
 
 export default withFormik({
-    mapPropsToValues: () => ({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-    }),
-    validate: (values) => {
-        const errors = {};
-        console.log(`Validate: ${Object.entries(values)}`);
-        // eslint-disable-next-line array-callback-return
-        Object.keys(values).map((v) => {
-            if(!values[v]){
-                errors[v] = "Required";
-            }
-        })
-        return errors;
-    },
-    handleSubmit: (values, {setSubmitting}) => {
-        alert(JSON.stringify(values));
-    }
+  mapPropsToValues: () => ({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  }),
+  validationSchema: Yup.object().shape({
+    name: Yup.string()
+      .required("A name is required")
+      .min(3, "Name must be at least 3 characters."),
+    email: Yup.string()
+      .required("An email address is required")
+      .email("Please enter a valid email address"),
+    phone: Yup.string()
+      .required("Phone number is required")
+      .min(9, "Minimum 9 digits required"),
+    message: Yup.string()
+      .required("Message is required")
+      .min(10, "Please provide more details")
+      .max(40, "Please limit your message to 40 characters"),
+  }),
+  handleSubmit: (values, { setSubmitting }) => {
+    alert(JSON.stringify(values));
+  },
 })(Contact);
