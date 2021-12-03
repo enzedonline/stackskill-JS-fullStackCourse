@@ -1,0 +1,19 @@
+.login-page {
+    min-height: 70vh;
+    background-color: cadetblue;
+    padding-top: 3rem;
+}
+.login-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 2rem;
+    box-shadow: 10px 10px 15px #333;
+    background-color: honeydew;
+    border-radius: 20px;
+}
+.login-form h1 {
+    display: block;
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: calc(1.175rem + 1vw);
+}
