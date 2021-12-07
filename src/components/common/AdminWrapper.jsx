@@ -63,7 +63,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-function PersistantDrawer(props) {
+function PersistentDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
@@ -131,7 +131,7 @@ class AdminWrapper extends Component {
   render() {
     return (
       <div id="admin-page">
-        <PersistantDrawer>{this.props.children}</PersistantDrawer>
+        <PersistentDrawer>{this.props.children}</PersistentDrawer>
       </div>
     );
   }

@@ -10,5 +10,25 @@ export const API = {
       .then((res) => {
         success(res);
       });
+  },
+  getUsers: (token, success) => {
+    axios.get(`${hostname}users`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      success(res);
+    });
+  },
+  getPosts: (token, success) => {
+    axios.get(`${hostname}posts`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((res) => {
+      success(res);
+    });
   }
 }
