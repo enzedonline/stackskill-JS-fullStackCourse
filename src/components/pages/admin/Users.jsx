@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { withRouter } from "../core";
+import { withRouter } from "../../core";
 import { connect } from "react-redux";
 
-class AdminDashboard extends Component {
+class Users extends Component {
   render() {
     return (
       <div>
-        <h2>You are logged in with {this.props.auth.token}</h2>
+          <h2>Users</h2>
       </div>
     );
   }
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(AdminDashboard));
+)(withRouter(Users));

@@ -17,3 +17,9 @@
     padding-bottom: 1rem;
     font-size: calc(1.175rem + 1vw);
 }
+.sidebar-label {
+    padding-left: 15px;
+}
+.sidebar-icon {
+    margin-top: 4px;
+}

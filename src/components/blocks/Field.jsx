@@ -26,6 +26,7 @@ class InputField extends Component {
                     value={this.props.value}
                     onChange={this.props.onChange}
                     onBlur={this.props.onBlur}
+                    autoComplete={this.props.autocomplete}
                 />
                 <p className="help-block text-danger">
                     {(this.props.touched && this.props.errors) &&

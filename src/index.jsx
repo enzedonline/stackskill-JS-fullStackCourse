@@ -3,19 +3,21 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./store/reducers";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
+import { PersistGate } from "redux-persist/lib/integration/react";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import { configurePersistedStore } from "./store/configureStore";
+
+const { store, persistor } = configurePersistedStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

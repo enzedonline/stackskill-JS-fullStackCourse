@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PageWrapper from "./components/common/PageWrapper";
 import AdminWrapper from "./components/common/AdminWrapper";
+import LoginWrapper from "./components/common/LoginWrapper";
 import { connect } from "react-redux";
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 
 // pages
 import Home from "./components/pages/Home";
@@ -11,8 +12,10 @@ import Services from "./components/pages/Services";
 import Portfolio from "./components/pages/Portfolio";
 import Team from "./components/pages/Team";
 import Contact from "./components/pages/Contact";
-import Login from "./components/pages/Login";
-import AdminDashboard from "./components/pages/AdminDashboard";
+import Login from "./components/pages/admin/Login";
+import AdminDashboard from "./components/pages/admin/AdminDashboard";
+import Posts from "./components/pages/admin/Posts";
+import Users from "./components/pages/admin/Users";
 
 class App extends Component {
   render() {
@@ -78,9 +81,31 @@ class App extends Component {
           <Route
             path="/admin"
             element={
-              <AdminWrapper>
-                {this.props.auth.token ? <AdminDashboard /> : <Login />}
-              </AdminWrapper>
+              this.props.auth.token ? (
+                <AdminWrapper>
+                  <AdminDashboard />
+                </AdminWrapper>
+              ) : (
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+              )
+            }
+          />
+          <Route
+            path="/admin/posts"
+            element={
+                <AdminWrapper>
+                  <Posts />
+                </AdminWrapper>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+                <AdminWrapper>
+                  <Users />
+                </AdminWrapper>
             }
           />
         </Routes>

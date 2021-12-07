@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Field from "../blocks/Field";
+import Field from "../../blocks/Field";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
-import * as AuthActions from "../../store/actions/authActions";
+import * as AuthActions from "../../../store/actions/authActions";
 
 const fieldList = [
   {
@@ -15,6 +15,7 @@ const fieldList = [
       required: "An email is required.",
       email: "Invalid email address.",
     },
+    autocomplete: "username"
   },
   {
     name: "password",
@@ -24,6 +25,7 @@ const fieldList = [
     validations: {
       required: "An password is required.",
     },
+    autocomplete: "current-password"
   },
 ];
 
