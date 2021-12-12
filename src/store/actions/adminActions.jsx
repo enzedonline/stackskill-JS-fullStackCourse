@@ -22,6 +22,39 @@ export const getPosts = (token) => {
     }
 }
 
+export const getPost = (id, token) => {
+    return (dispatch) => {
+        API.getPost (id, token, res => {
+            dispatch({
+                type: 'GOT_POST',
+                payload: res.data
+            })
+        })
+    }
+}
+
+export const createPost = (post, token) => {
+    return (dispatch) => {
+        API.createPost (post, token, res => {
+            dispatch({
+                type: 'POST_CREATED',
+                payload: res.data
+            })
+        })
+    }
+}
+
+export const updatePost = (id, post, token) => {
+    return (dispatch) => {
+        API.updatePost (id, post, token, res => {
+            dispatch({
+                type: 'POST_UPDATED',
+                payload: res.data
+            })
+        })
+    }
+}
+
 export const register = (email, password) => {
     return {
         type: 'REGISTER',

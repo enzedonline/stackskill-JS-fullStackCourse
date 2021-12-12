@@ -5,10 +5,10 @@ import SimpleTable from '../../blocks/SimpleTable'
 import * as AdminActions from '../../../store/actions/adminActions';
 
 const columns = [
-    {label: 'First Name', fieldName: 'firstName'},
-    {label: 'Surname', fieldName: 'lastName'},
-    {label: 'Title', fieldName: 'title'},
-    {label: 'Roles', fieldName: 'roles'},
+    {label: 'First Name', fieldName: 'firstName', format: 'string'},
+    {label: 'Surname', fieldName: 'lastName', format: 'string'},
+    {label: 'Title', fieldName: 'title', format: 'string'},
+    {label: 'Roles', fieldName: 'roles', format: 'array'},
 ]
 
 class Users extends Component {

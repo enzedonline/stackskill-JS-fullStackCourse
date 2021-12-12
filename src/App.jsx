@@ -16,6 +16,7 @@ import Login from "./components/pages/admin/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
 import Posts from "./components/pages/admin/Posts";
 import Users from "./components/pages/admin/Users";
+import PostForm from "./components/pages/admin/PostForm";
 
 class App extends Component {
   render() {
@@ -95,17 +96,57 @@ class App extends Component {
           <Route
             path="/admin/posts"
             element={
+              this.props.auth.token ? (
                 <AdminWrapper>
                   <Posts />
                 </AdminWrapper>
+              ) : (
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+              )
+            }
+          />
+          <Route
+            path="/admin/post/create"
+            element={
+              this.props.auth.token ? (
+                <AdminWrapper>
+                  <PostForm />
+                </AdminWrapper>
+              ) : (
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+              )
+            }
+          />
+          <Route
+            path="/admin/post/edit/:id"
+            element={
+              this.props.auth.token ? (
+                <AdminWrapper>
+                  <PostForm />
+                </AdminWrapper>
+              ) : (
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+              )
             }
           />
           <Route
             path="/admin/users"
             element={
+              this.props.auth.token ? (
                 <AdminWrapper>
                   <Users />
                 </AdminWrapper>
+              ) : (
+                <LoginWrapper>
+                  <Login />
+                </LoginWrapper>
+              )
             }
           />
         </Routes>
