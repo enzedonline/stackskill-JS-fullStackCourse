@@ -12,6 +12,10 @@ import Services from "./components/pages/Services";
 import Portfolio from "./components/pages/Portfolio";
 import Team from "./components/pages/Team";
 import Contact from "./components/pages/Contact";
+import BlogList from "./components/pages/BlogList";
+import BlogPage from "./components/pages/BlogPage";
+
+// admin
 import Login from "./components/pages/admin/Login";
 import AdminDashboard from "./components/pages/admin/AdminDashboard";
 import Posts from "./components/pages/admin/Posts";
@@ -23,22 +27,19 @@ class App extends Component {
     return (
       <div>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <PageWrapper>
-                <Home />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="home"
-            element={
-              <PageWrapper>
-                <Home />
-              </PageWrapper>
-            }
-          />
+          {["/", "/home"].map((path, index) => {
+            return (
+              <Route
+                path={path}
+                element={
+                  <PageWrapper>
+                    <Home />
+                  </PageWrapper>
+                }
+                key={index}
+              />
+            );
+          })}
           <Route
             path="/about"
             element={
@@ -80,6 +81,22 @@ class App extends Component {
             }
           />
           <Route
+            path="/blogs"
+            element={
+              <PageWrapper>
+                <BlogList />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/blog/:id"
+            element={
+              <PageWrapper>
+                <BlogPage />
+              </PageWrapper>
+            }
+          />
+          <Route
             path="/admin"
             element={
               this.props.auth.token ? (
@@ -107,34 +124,25 @@ class App extends Component {
               )
             }
           />
-          <Route
-            path="/admin/post/create"
-            element={
-              this.props.auth.token ? (
-                <AdminWrapper>
-                  <PostForm />
-                </AdminWrapper>
-              ) : (
-                <LoginWrapper>
-                  <Login />
-                </LoginWrapper>
-              )
-            }
-          />
-          <Route
-            path="/admin/post/edit/:id"
-            element={
-              this.props.auth.token ? (
-                <AdminWrapper>
-                  <PostForm />
-                </AdminWrapper>
-              ) : (
-                <LoginWrapper>
-                  <Login />
-                </LoginWrapper>
-              )
-            }
-          />
+          {["/admin/post/create", "/admin/post/edit/:id"].map((path, index) => {
+            return (
+              <Route
+                path={path}
+                element={
+                  this.props.auth.token ? (
+                    <AdminWrapper>
+                      <PostForm />
+                    </AdminWrapper>
+                  ) : (
+                    <LoginWrapper>
+                      <Login />
+                    </LoginWrapper>
+                  )
+                }
+                key={index}
+              />
+            );
+          })}
           <Route
             path="/admin/users"
             element={

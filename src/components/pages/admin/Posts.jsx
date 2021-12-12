@@ -19,7 +19,11 @@ const columns = [
 
 
 class Posts extends Component {
-  componentWillReceiveProps () {
+  constructor(props) {
+    super(props);
+    this.componentDidUpdate();
+   }
+  componentDidUpdate() {
     this.props.getPosts(this.props.auth.token);
   }
   render() {

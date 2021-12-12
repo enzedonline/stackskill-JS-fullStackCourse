@@ -58,7 +58,6 @@ export const API = {
       }
     })
     .then((res) => {
-      console.log('api', res)
       success(res);
     });
   },

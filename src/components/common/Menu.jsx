@@ -18,6 +18,7 @@ class Menu extends Component {
                                 <li className="nav-item"><Link className="nav-link" to="/portfolio">Portfolio</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/team">Team</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/blogs">Blog</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
                                 <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
                             </ul>
